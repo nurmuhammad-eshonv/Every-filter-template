@@ -8,7 +8,7 @@ function App() {
   const [category, setCategory] = useState(() => localStorage.getItem("category") || "all");
   const [company, setCompany] = useState(() => localStorage.getItem("company") || "");
   const [shipping, setShipping] = useState(() => localStorage.getItem("shipping") === "true");
-  const [priceRange, setPriceRange] = useState(() => localStorage.getItem("priceRange") || "100");
+  // const [priceRange, setPriceRange] = useState(() => localStorage.getItem("priceRange") || "100");
 
   useEffect(() => {
     localStorage.setItem("search", search);
@@ -26,15 +26,16 @@ function App() {
     localStorage.setItem("shipping", shipping);
   }, [shipping]);
 
-  useEffect(() => {
-    localStorage.setItem("priceRange", priceRange);
-  }, [priceRange]);
+  // useEffect(() => {
+  //   localStorage.setItem("priceRange", priceRange);
+  // }, [priceRange]);
 
   function handeClear() {
     setSearch("");
     setCategory("all");
     setCompany("");
     setShipping(false);
+    // setPriceRange("100");
     localStorage.clear(); 
   }
 
@@ -104,12 +105,12 @@ function App() {
                     type="range"
                     min={0}
                     max="10000"
-                    value={priceRange}
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    // value={priceRange}
+                    // onChange={(e) => setPriceRange(e.target.value)}
                     className="range range-primary"
                   />
                   <label className="text-[13px] flex justify-between font-[600]">
-                    <span>${priceRange}</span>
+                    {/* <span>${priceRange}</span> */}
                     <span>Max: $1.000.00</span>
                   </label>
                 </div>
@@ -158,9 +159,9 @@ function App() {
               ? item
               : item.company.toLowerCase().includes(company);
           })
-          .filter((item) => {
-            return item.price <= priceRange;
-          })
+          // .filter((item) => {
+          //   return item.price <= priceRange;
+          // })
           .filter((item) => {
             return !shipping || item.shipping === true;
           })
